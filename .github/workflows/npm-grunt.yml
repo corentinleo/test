@@ -1,26 +1,32 @@
-name: NodeJS with Grunt
+name: Prevent Push
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main  # Change this to your branch name
 
 jobs:
-  build:
+  prevent-push:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [14.x, 16.x, 18.x]
-
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-
-    - name: Build
+    - name: Get commit message
+      id: get_commit_message
       run: |
-        npm install
-        grunt
+        COMMIT_MESSAGE=$(git log -n 1 --pretty=format:"%s")
+        echo "::set-output name=commit_message::${COMMIT_MESSAGE}"
+
+    - name: Run pre-push hook
+      run: |
+        # Access the commit message using the output variable
+        COMMIT_MESSAGE="${{ steps.get_commit_message.outputs.commit_message }}"
+
+        # Add your condition to prevent the push
+        if [ "$COMMIT_MESSAGE" == "YOUR_UNWANTED_COMMIT_MESSAGE" ]; then
+          echo "Error: Push rejected. This commit message is not allowed."
+          exit 1
+        fi
+      shell: bash
