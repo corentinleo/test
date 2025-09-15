@@ -27,3 +27,13 @@ try {
     console.error(`Unable to get servers from inventory ${err}`);
     process.exit(1);
   }
+
+  let arr = [1,2];
+
+  for(const i of arr){
+    for(const j of arr){
+        console.log('toto')
+    }
+  }
+
+  Users.find({ 'titi':true}).fetchAsync();
