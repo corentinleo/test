@@ -44,3 +44,12 @@ try {
         await tutu();
     }
   }
+
+
+  for(const i of arr){
+    for(const j of arr){
+        console.log('toto')
+    }
+  }
+
+  Users.find({ 'titi':true}).fetchAsync();
