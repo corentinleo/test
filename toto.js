@@ -72,5 +72,14 @@ return [{titi:true}];
   ))
 
 
+  this.subscribe('mySUb');
+
+
+
+
+  Meteor.publish('titi',()=> (
+return [{titi:true}];
+
+  ))
 
 
