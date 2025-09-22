@@ -61,4 +61,16 @@ try {
     }
   }
 
-  Users.find({ 'titi':true}).fetchAsync();
+  this.subscribe('mySUb');
+
+
+
+
+  Meteor.publish('titi',()=> (
+return [{titi:true}];
+
+  ))
+
+
+
+
