@@ -83,3 +83,7 @@ return [{titi:true}];
   ))
 
 
+while(i < 1_000_000){
+  i+=1;
+}
+
